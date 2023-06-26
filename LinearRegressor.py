@@ -40,8 +40,7 @@ class LinearRegressor(BaseEstimator, RegressorMixin):
         :return: the linear regression objective loss (float scalar)
         """
 
-        # TODO: complete the loss calculation
-        loss = None
+        loss = 1 / (np.shape(X)[0]) * np.linalg.norm(np.dot(X, w) + b - y) ** 2
 
         return loss
 
@@ -56,9 +55,9 @@ class LinearRegressor(BaseEstimator, RegressorMixin):
         :param y: targets for loss computation; array of shape (n_samples,)
         :return: a tuple with (the gradient of the weights, the gradient of the bias)
         """
-        # TODO: calculate the analytical gradient w.r.t w and b
-        g_w = None
-        g_b = 0.0
+        
+        g_w = 2 / (np.shape(X)[0]) * np.dot(X.T, (np.dot(X, w) + b - y))
+        g_b = 2 / (np.shape(X)[0]) * np.sum(np.dot(X, w) + b - y)
 
         return g_w, g_b
 
@@ -92,13 +91,12 @@ class LinearRegressor(BaseEstimator, RegressorMixin):
             batch_X = X[start_idx: end_idx]
             batch_y = y[start_idx: end_idx]
 
-            # TODO: Compute the gradient for the current *batch*
-            g_w, g_b = None, None
+            # Compute the gradient for the current *batch*
+            g_w, g_b = self.gradient(self.w, self.b, batch_X, batch_y)
 
             # Perform a gradient step
-            # TODO: update the learned parameters correctly
-            self.w = None
-            self.b = 0.0
+            self.w = self.w - self.lr * g_w
+            self.b = self.b - self.lr * g_b
 
             if keep_losses:
                 train_losses.append(self.loss(self.w, self.b,  X, y))
@@ -126,8 +124,6 @@ class LinearRegressor(BaseEstimator, RegressorMixin):
         :param X: samples for prediction; array of shape (n_samples, n_features)
         :return: Predicted continuous labels for samples in X; array of shape (n_samples,)
         """
-
-        # TODO: Compute
-        y_pred = None
+        y_pred = np.dot(X, self.w) + self.b
 
         return y_pred
