@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+from LinearRegressor import LinearRegressor
 
 def test_lr(X_train, y_train, X_val, y_val, title:str, max_iter = 1500):
   lr_list = np.logspace(-9, -1, 9)
