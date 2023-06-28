@@ -1,7 +1,3 @@
-import numpy as np
-from LinearRegressor import LinearRegressor
-import matplotlib.pyplot as plt
-
 def numerical_subgradient(w, b, X, y, delta=1e-4):
     w_ = w.copy()
     g_w = np.zeros_like(w_)

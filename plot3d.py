@@ -24,6 +24,6 @@ def plot3d(df, colX:str, colY:str, colZ:str, title:str, predictions=None):
   
   axes[0].set_zlabel("\n" + colZ, linespacing=2.2)
 
-  plt.suptitle(title, fontsize=32)
+  plt.suptitle(title, fontsize=32, y=0.80)
   plt.tight_layout()
   plt.show()

@@ -93,6 +93,6 @@ def prepare_location(data):
 
 def prepare_pcr_date(data):
     import pandas as pd
-    data["pcr_date"] = pd.to_datetime(data["pcr_date"])
+    data["pcr_date"] = pd.to_datetime(data["pcr_date"], format="%d-%m-%y")
     data["pcr_date"] = (data["pcr_date"] - pd.to_datetime("2020-01-01")).dt.days
     return data
